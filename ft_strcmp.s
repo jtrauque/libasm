@@ -12,10 +12,10 @@ ft_strcmp:
 	inc rsi
 	sub al, bl
 	je ft_strcmp
-	movzx rax, al
+	movsx rax, al
 
 	ret
 
 .exit:
-	movzx rax, al
+	movsx rax, al
 	ret
