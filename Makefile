@@ -6,13 +6,13 @@
 #    By: jtrauque <jtrauque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 11:44:52 by jtrauque          #+#    #+#              #
-#    Updated: 2021/04/19 13:09:26 by jtrauque         ###   ########.fr        #
+#    Updated: 2021/04/19 13:59:47 by jtrauque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libasm.a
 
-SRCS 		= ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s
+SRCS 		= ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s
 
 SRC_DIR   = srcs/
 OBJ_DIR   = objs/
@@ -39,7 +39,7 @@ $(DIR) :
 $(OBJ_DIR)%.o: $(SRC_DIR)%.s | $(DIR)
 		@$(NASM) $< -o $@
 test : all
-		@gcc main.c libasm.a
+		@gcc main.c libasm.a -lc
 		@./a.out
 
 clean :
