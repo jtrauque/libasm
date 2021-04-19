@@ -1,6 +1,6 @@
 
 global	ft_write
-;extern	___error
+extern	__errno_location
 
 ft_write:
 	call _print
@@ -17,9 +17,12 @@ _print:
 	ret
 
 .err:
+	push rbx
+	mov rbx, rax
+	call __errno_location wrt ..plt
+	neg rbx
+	mov [rax], rbx
+	pop rbx
 	mov rdx, -1
 	mov rax, rdx
-	;call ___error
-	;mov rax, [rax]
-	;neg rax
 	ret
