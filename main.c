@@ -8,22 +8,7 @@ char	*ft_strcpy(char *dest, const char *str);
 int		ft_strcmp(char *str, char *dst);
 int		ft_write(int fd, const void* buf, size_t count);
 int		ft_read(int fd, void* buf, size_t count);
-
-
-void strcmp_test(char *s, char *s2) 
-{ 
-	char *str = s; 
-	char *dst = s2; 
-	int ret_true = strcmp(str, dst); 
-	int ret = ft_strcmp(str, dst); 
-	if (ret != ret_true) 
-	{ 
-		printf("%s vs %s\n", str, dst); 
-		printf("%d vs %d\n", ret, ret_true); 
-	} 
-	else 
-		printf("✔\n"); 
-}
+char	*ft_strdup(char *str);
 
 int my_cmp(char *s, char*s2, int len) {
 	int i = 0;
@@ -35,6 +20,33 @@ int my_cmp(char *s, char*s2, int len) {
 	}
 	return 0;
 }
+
+int		ft_strcmp2(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+void strcmp_test(char *s, char *s2) 
+{ 
+	char *str = s; 
+	char *dst = s2; 
+	int ret = ft_strcmp(str, dst); 
+	int ret_c = ft_strcmp2(str, dst); 
+	if (ret != ret_c) 
+	{ 
+		printf("%s vs %s\n", str, dst); 
+		printf("%d vs %d\n", ret, ret_c); 
+	} 
+	else 
+		printf("✔\n"); 
+}
+
+
 
 #include<stdlib.h>
 void strcpy_test(char *str)
@@ -91,6 +103,22 @@ void	write_test(fd, str, len)
 /* 	len = ft_strlen(str); */
 /* 	printf("%d vs %zu\n", len, strlen(str)); */
 /* } */
+char	*ft_strcpy2(char *dest, char *src)
+{
+	int i;
+
+	i = 0;
+	if (!src)
+		return (dest);
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		printf("%c\n", dest[i]);
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
 
 int		main()
 {
@@ -112,6 +140,7 @@ int		main()
 	strcmp_test("", "Hello");
 	strcmp_test("", "");
 	strcmp_test("\xff\xff", "\xff");
+	strcmp_test("\xff", "\xff\xff");
 	printf("----------WRITE---------\n");
 	write_test(1, "Hello World\n", 12);
 	write_test(1, "Hello World\n", 6);
@@ -121,6 +150,12 @@ int		main()
 	write_test(1, "", 2);
 	write_test(2, "erreur", 6);
 	write_test(4, "erreur", 6);
+	printf("----------STRDUP---------\n");
+	/* char *s1; */
+	/* char *s2; */
+	/* s1 = ft_strdup("abc"); */
+	/* s2 = strdup("abc"); */
+	/* printf("%s vs %s\n", s1, s2); */
 
 }
 
