@@ -70,39 +70,38 @@ void strcpy_test(char *str)
 
 void	write_test(fd, str, len) 
 { 
-	int ret_true = write(fd, str, len); 
+	int ret_true = write(fd, str, len);
+	int errno1 = errno;
+	errno = 0;
 	int ret = ft_write(fd, str, len); 
+	int errno2 = errno;
+	printf("Error code: %d - %d\n", errno1, errno2);  return ;
 	if (ret != ret_true) 
 	{ 
 		printf("%d vs %d\n", ret, ret_true); 
-		printf("Error code: %d\n", errno);  return ;
+		printf("Error code: %d - %d\n", errno1, errno2);  return ;
 	} 
 	else 
 		printf("✔\n"); 
 }
 
-#define read_test(fd, str, len) \
-{ \
-	int ret_true = read(fd, str, len); \
-	int ret = ft_read(fd, str, len); \
-	if (ret != ret_true) \
-	{ \
-		printf("%d vs %d\n", ret, ret_true); \
-		printf("Error code: %d\n", errno);  return(1);\
-	} \
-	else \
-		printf("✔\n"); \
+void	 read_test(fd, str, len) 
+{ 
+	int ret_true = read(fd, str, len); 
+	int errno1 = errno;
+	errno = 0;
+	int ret = ft_read(fd, str, len); 
+	int errno2 = errno;
+	printf("Error code: %d - %d\n", errno1, errno2);  return ;
+	if (ret != ret_true) 
+	{ 
+		printf("%d vs %d\n", ret, ret_true); 
+		printf("Error code: %d - %d\n", errno1, errno2);  return ;
+	} 
+	else 
+		printf("✔\n"); 
 }
 
-/* int		main() */
-/* { */
-/* 	char *str = "Hello World"; */
-/* 	/1* char *str = ""; *1/ */
-/* 	int len; */
-
-/* 	len = ft_strlen(str); */
-/* 	printf("%d vs %zu\n", len, strlen(str)); */
-/* } */
 char	*ft_strcpy2(char *dest, char *src)
 {
 	int i;
@@ -122,6 +121,15 @@ char	*ft_strcpy2(char *dest, char *src)
 
 int		main()
 {
+	printf("----------STRLEN---------\n");
+	char *str = "Hello World";
+	char *str2 = "";
+	int len;
+
+	len = ft_strlen(str);
+	printf("%d vs %zu\n", len, strlen(str));
+	len = ft_strlen(str2);
+	printf("%d vs %zu\n", len, strlen(str2));
 	printf("----------STRCPY---------\n");
 	strcpy_test("lorem\tipsum\tdolor\nsit\nnamet\n");
 	strcpy_test("Hello World!");
@@ -156,11 +164,8 @@ int		main()
 	/* s1 = ft_strdup("abc"); */
 	/* s2 = strdup("abc"); */
 	/* printf("%s vs %s\n", s1, s2); */
-
-}
-
-/* int		main() */
-/* { */
+	printf("----------READ---------\n");
 /* 	/1* char *buff; *1/ */
 /* 	/1* read_test(1, buff, 1024); *1/ */
-/* } */
+
+}
