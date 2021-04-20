@@ -8,12 +8,13 @@ ft_strcmp:
 	je exit
 	inc rdi
 	inc rsi
-	sub al, bl
+	movzx rax, al
+	movzx rbx, bl
+	sub rax, rbx
 	je ft_strcmp
-	movsx rax, al
 
 	ret
 
 exit:
-	movsx rax, al
+	movzx rax, al
 	ret
